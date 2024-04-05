@@ -1,7 +1,5 @@
 import "./App.css";
 
-function App() {
+export default function App() {
 	return <>Another ToDo App</>;
 }
-
-export default App;
