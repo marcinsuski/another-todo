@@ -1,17 +1,23 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./index.css";
-import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
-import { store } from "./redux/store";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<Provider store={store}>
-			<Router>
-				<App />
-			</Router>
-		</Provider>
-	</StrictMode>
-);
+import MainPage from "./components/pages";
+import Header from "./components/common/header";
+import Main from "./components/common/main";
+
+import LoadingText from "./loading_text";
+export default function App() {
+	return (
+		<>
+			<Header />
+			<Main>
+				<Suspense fallback={<LoadingText />}>
+					<Routes>
+						<Route path="*" element={<MainPage />} />
+					</Routes>
+				</Suspense>
+			</Main>
+		</>
+	);
+}

@@ -1,0 +1,15 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 2px solid var(--neutral400);
+	margin: 1rem 1rem 2rem;
+}
+
+.pageTitle {
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.today {
+	text-align: right;
+}

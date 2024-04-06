@@ -1,3 +1,8 @@
+import Wrapper from "../common/wrapper";
 export default function MainPage() {
-	return <div>Another Todo App</div>;
+	return (
+		<Wrapper>
+			<div>Recent todos</div>
+		</Wrapper>
+	);
 }
