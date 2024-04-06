@@ -10,10 +10,10 @@ export function renderWithRouter(ui: ReactNode, { route = "/" } = {}) {
 	};
 }
 
-describe("Test router", () => {
+describe("Router", () => {
 	test("renders default route", () => {
 		const { getByText } = renderWithRouter(<App />, { route: "/" });
-		const titleElement = getByText("Another Todo App");
+		const titleElement = getByText(/another todo app/i);
 		expect(titleElement).toBeInTheDocument();
 	});
 });
