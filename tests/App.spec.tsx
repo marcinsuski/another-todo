@@ -1,8 +1,9 @@
-import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
-import App from "../src";
 import { ReactNode } from "react";
 import { MemoryRouter } from "react-router-dom";
+import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
+
+import App from "../src";
 
 export function renderWithRouter(ui: ReactNode, { route = "/" } = {}) {
 	return {

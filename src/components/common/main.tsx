@@ -1,9 +1,9 @@
 import styles from "./main.module.css";
 
-type WrapperProps = {
+type MainProps = {
 	children: React.ReactNode;
 };
 
-export default function Wrapper({ children }: WrapperProps) {
+export default function Main({ children }: MainProps) {
 	return <main className={styles.main}>{children}</main>;
 }

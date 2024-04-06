@@ -3,7 +3,6 @@ export default {
 	testEnvironment: "jest-environment-jsdom",
 	transform: {
 		"^.+\\.tsx?$": "ts-jest",
-		// process `*.tsx` files with `ts-jest`
 	},
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
@@ -13,8 +12,10 @@ export default {
 	collectCoverage: true,
 	coverageReporters: ["json", "html"],
 	collectCoverageFrom: [
-		"**/*.{js,jsx,ts,tsx}",
+		"**/src/*.{js,jsx,ts,tsx}",
 		"!**/node_modules/**",
 		"!**/vendor/**",
+		"!**/coverage/**",
+		"!**/mocks/**",
 	],
 };

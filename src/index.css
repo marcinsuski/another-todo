@@ -24,14 +24,14 @@
 	--primary700: rgb(0, 139, 12);
 	--primary800: rgb(0, 82, 7);
 
-	--secondary100: rgb(255, 238, 171);
-	--secondary200: rgb(255, 225, 107);
-	--secondary300: rgb(255, 216, 58);
-	--secondary400: rgb(255, 205, 4);
-	--secondary500: rgb(206, 165, 0);
-	--secondary600: rgb(179, 143, 0);
-	--secondary700: rgb(135, 108, 0);
-	--secondary800: rgb(70, 56, 0);
+	--secondary100: rgb(255, 230, 194);
+	--secondary200: rgb(255, 211, 146);
+	--secondary300: rgb(255, 188, 87);
+	--secondary400: rgb(255, 153, 0);
+	--secondary500: rgb(217, 130, 0);
+	--secondary600: rgb(193, 116, 0);
+	--secondary700: rgb(164, 98, 0);
+	--secondary800: rgb(100, 60, 0);
 
 	--text100: rgb(7, 14, 14);
 	--text200: var(--neutral700);
