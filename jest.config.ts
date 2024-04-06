@@ -10,4 +10,11 @@ export default {
 			"<rootDir>/mocks/fileMock.js",
 		"\\.(css|less)$": "<rootDir>/mocks/styleMock.js",
 	},
+	collectCoverage: true,
+	coverageReporters: ["json", "html"],
+	collectCoverageFrom: [
+		"**/*.{js,jsx,ts,tsx}",
+		"!**/node_modules/**",
+		"!**/vendor/**",
+	],
 };

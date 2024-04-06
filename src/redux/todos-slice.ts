@@ -1,4 +1,4 @@
-import { TodoType } from "@/types";
+import { TodoType } from "../types";
 import { createSlice } from "@reduxjs/toolkit";
 
 const todos = localStorage.getItem("todos") || [];
