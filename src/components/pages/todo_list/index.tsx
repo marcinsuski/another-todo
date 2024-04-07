@@ -1,5 +1,12 @@
-import Table from "../../../components/common/ui/table";
+import Table from "../../common/table";
+import Button from "../../common/button";
 
 export default function TodoList() {
-	return <Table />;
+	return (
+		<>
+			<Table />
+
+			<Button mode="round" title="" icon={"src/static/add_white.svg"} />
+		</>
+	);
 }

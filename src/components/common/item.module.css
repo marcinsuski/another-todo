@@ -1,0 +1,13 @@
+.item {
+	border-radius: 8px;
+	background-color: var(--neutral200);
+	border: 1px solid var(--neutral300);
+	padding: 1.5rem;
+	height: fit-content;
+	transition: 300ms ease-in-out;
+	margin-bottom: 0.5rem;
+}
+
+.item:hover {
+	background-color: var(--primary100);
+}

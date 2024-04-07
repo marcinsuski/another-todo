@@ -1,0 +1,13 @@
+.table {
+	width: 60%;
+	margin: 0 auto;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.table__head {
+	text-align: center;
+	margin: 0 0 1rem 0;
+}

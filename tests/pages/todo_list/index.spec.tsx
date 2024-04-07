@@ -6,7 +6,7 @@ import TodoList from "../../../src/components/pages/todo_list/index.tsx";
 describe("Todo list", () => {
 	it("Renders the Todo list table", () => {
 		const { getByText } = render(<TodoList />);
-		const titleElement = getByText(/todolist/i);
+		const titleElement = getByText(/recent todos/i);
 		expect(titleElement).toBeInTheDocument();
 	});
 });
