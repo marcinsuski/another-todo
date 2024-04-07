@@ -7,7 +7,7 @@ export type Todo = {
 export type Button = {
 	title?: string;
 	icon?: string;
-	mode?: "primary" | "secondary" | "flat" | "outline";
+	mode?: "primary" | "secondary" | "flat" | "outline" | "round";
 	type?: "submit" | "reset" | "button";
 	disabled?: boolean;
 	color?: "error" | "success";

@@ -3,4 +3,5 @@ export const BUTTON_TYPES = {
 	SECONDARY: "secondary",
 	OUTLINE: "outline",
 	FLAT: "flat",
+	ROUND: "round",
 };
