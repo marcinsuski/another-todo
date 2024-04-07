@@ -32,7 +32,7 @@
 		top: 50%;
 		left: 0;
 		transform: translateY(-50%);
-		background: var(--neutral300);
+		background: var(--neutral400);
 	}
 }
 

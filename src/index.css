@@ -3,46 +3,49 @@
 	line-height: 1.5;
 	font-weight: 400;
 
-	--shadeLight: rgb(255, 255, 255);
-	--shadeDark: rgb(0, 0, 0);
+	--shadeLight: hsl(0, 0%, 100%);
+	--shadeDark: hsl(0, 0%, 0%);
 
-	--neutral100: rgb(247, 247, 247);
-	--neutral200: rgb(239, 239, 239);
-	--neutral300: rgb(211, 211, 211);
-	--neutral400: rgb(193, 193, 193);
-	--neutral500: rgb(169, 169, 169);
-	--neutral600: rgb(135, 135, 135);
-	--neutral700: rgb(91, 91, 91);
-	--neutral800: rgb(49, 49, 49);
+	--neutral100: hsl(0, 0%, 100%);
+	--neutral200: hsl(0, 0%, 95%);
+	--neutral300: hsl(0, 0%, 90%);
+	--neutral400: hsl(0, 0%, 85%);
+	--neutral500: hsl(0, 0%, 75%);
+	--neutral600: hsl(0, 0%, 65%);
+	--neutral700: hsl(0, 0%, 55%);
+	--neutral800: hsl(0, 0%, 45%);
+	--neutral900: hsl(0, 0%, 35%);
 
-	--primary100: rgb(209, 255, 213);
-	--primary200: rgb(156, 255, 164);
-	--primary300: rgb(108, 255, 120);
-	--primary400: rgb(2, 237, 22);
-	--primary500: rgb(0, 203, 17);
-	--primary600: rgb(0, 184, 15);
-	--primary700: rgb(0, 139, 12);
-	--primary800: rgb(0, 82, 7);
+	--primary100: hsl(125, 100%, 80%);
+	--primary200: hsl(125, 100%, 80%);
+	--primary300: hsl(125, 100%, 70%);
+	--primary400: hsl(125, 100%, 60%);
+	--primary500: hsl(125, 100%, 50%);
+	--primary600: hsl(125, 100%, 40%);
+	--primary700: hsl(125, 100%, 30%);
+	--primary800: hsl(125, 100%, 20%);
+	--primary900: hsl(125, 100%, 10%);
 
-	--secondary100: rgb(255, 230, 194);
-	--secondary200: rgb(255, 211, 146);
-	--secondary300: rgb(255, 188, 87);
-	--secondary400: rgb(255, 153, 0);
-	--secondary500: rgb(217, 130, 0);
-	--secondary600: rgb(193, 116, 0);
-	--secondary700: rgb(164, 98, 0);
-	--secondary800: rgb(100, 60, 0);
+	--secondary100: hsl(36, 100%, 90%);
+	--secondary200: hsl(36, 100%, 80%);
+	--secondary300: hsl(36, 100%, 70%);
+	--secondary400: hsl(36, 100%, 60%);
+	--secondary500: hsl(36, 100%, 50%);
+	--secondary600: hsl(36, 100%, 40%);
+	--secondary700: hsl(36, 100%, 30%);
+	--secondary800: hsl(36, 100%, 20%);
+	--secondary900: hsl(36, 100%, 10%);
 
-	--text100: rgb(7, 14, 14);
+	--text100: hsl(180, 33%, 4%);
 	--text200: var(--neutral700);
 	--text300: var(--neutral400);
 	--text400: var(--neutral100);
 
-	--error50: rgb(255, 164, 191);
-	--error500: rgb(228, 83, 78);
+	--error50: hsl(342, 100%, 82%);
+	--error500: hsl(0, 74%, 60%);
 
-	--success50: rgb(184, 255, 186);
-	--success500: rgb(1, 162, 30);
+	--success50: hsl(122, 100%, 86%);
+	--success500: hsl(131, 99%, 32%);
 
 	--s: 0.5rem;
 	--m: 1rem;

@@ -32,27 +32,29 @@
 	border-color: var(--primary600);
 	&:hover {
 		background-color: var(--primary700);
+		border-color: var(--primary700);
 	}
 }
 
 .secondary {
 	color: var(--shadeLight);
-	background-color: var(--secondary400);
-	border-color: var(--secondary400);
+	background-color: var(--secondary500);
+	border-color: var(--secondary500);
 	&:hover {
-		background-color: var(--secondary700);
+		background-color: var(--secondary600);
+		border-color: var(--secondary600);
 	}
 }
 
 .outline {
-	color: var(--primary600);
+	color: var(--primary500);
 	background-color: transparent;
-	border-color: var(--primary600);
+	border-color: var(--primary500);
 
 	&:hover {
 		color: var(--shadeLight);
-		background-color: var(--primary600);
-		border-color: var(--primary600);
+		background-color: var(--primary500);
+		border-color: var(--primary500);
 	}
 }
 
@@ -88,6 +90,7 @@
 	color: var(--shadeLight);
 	&:hover {
 		background-color: var(--primary700);
+		border-color: var(--primary700);
 	}
 }
 
