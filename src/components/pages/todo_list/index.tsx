@@ -6,7 +6,12 @@ export default function TodoList() {
 		<>
 			<Table />
 
-			<Button mode="round" title="" icon={"src/static/add_white.svg"} />
+			<Button
+				mode="round"
+				className={"addTodo"}
+				title=""
+				icon={"src/static/add_white.svg"}
+			/>
 		</>
 	);
 }

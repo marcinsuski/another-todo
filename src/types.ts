@@ -5,12 +5,12 @@ export type Todo = {
 };
 
 export type Button = {
-	title?: string;
+	color?: "error" | "success";
+	disabled?: boolean;
 	icon?: string;
+	title?: string;
 	mode?: "primary" | "secondary" | "flat" | "outline" | "round";
 	type?: "submit" | "reset" | "button";
-	disabled?: boolean;
-	color?: "error" | "success";
-	style?: object;
+	className?: string;
 	onClick?: () => void;
 };

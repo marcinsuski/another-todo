@@ -14,6 +14,7 @@ import type { Button } from "types";
  */
 export default function Button({
 	color,
+	className,
 	disabled = false,
 	icon,
 	mode,
@@ -33,6 +34,7 @@ export default function Button({
 			: styles.flat;
 
 	const buttonColor = color === "error" ? styles.error : "";
+	const customClass = styles[`${className}`];
 
 	return (
 		<div className={styles.button_container}>
@@ -40,7 +42,9 @@ export default function Button({
 				data-testid="my-button"
 				type={type ? type : "button"}
 				disabled={disabled}
-				className={[styles.button, buttonStyle, buttonColor].join(" ")}
+				className={[styles.button, buttonStyle, buttonColor, customClass].join(
+					" "
+				)}
 				onClick={onClick}
 			>
 				{icon && <img src={icon} alt="" width={20} height={20} />}
