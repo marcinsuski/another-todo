@@ -13,7 +13,7 @@
 }
 
 .item:hover {
-	background-color: var(--neutral100);
+	background-color: var(--neutral200);
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
 }
 
@@ -24,15 +24,20 @@
 .item__name {
 	padding-left: 1rem;
 	position: relative;
-	&:before {
+	&:before,
+	&:after {
 		position: absolute;
 		content: "";
 		width: 1px;
-		height: 85%;
+		height: 100%;
 		top: 50%;
 		left: 0;
 		transform: translateY(-50%);
 		background: var(--neutral400);
+	}
+	&:after {
+		left: unset;
+		right: 0;
 	}
 }
 

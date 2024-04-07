@@ -1,7 +1,7 @@
 .header {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 2px solid var(--neutral400);
+	border-bottom: 2px solid var(--neutral500);
 	margin: 1rem 1rem 2rem;
 }
 

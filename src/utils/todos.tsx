@@ -1,4 +1,4 @@
-const mockTodos = [
+const Todos = [
 	{
 		id: 1,
 		name: "first todo",
@@ -7,18 +7,23 @@ const mockTodos = [
 	{
 		id: 2,
 		name: "second todo",
-		completed: false,
+		completed: true,
 	},
 	{
 		id: 3,
 		name: "third todo",
-		completed: false,
+		completed: true,
 	},
 	{
 		id: 4,
 		name: "fourth todo",
 		completed: false,
 	},
+	{
+		id: 5,
+		name: "5th todo",
+		completed: true,
+	},
 ];
 
-export default mockTodos;
+export default Todos;
