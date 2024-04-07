@@ -1,0 +1,20 @@
+.checkbox {
+	border: 1px solid;
+	border-color: var(--error500);
+	border-radius: 50%;
+	background-color: transparent;
+	color: var(--shadeLight);
+	width: 1.2rem;
+	height: 1.2rem;
+	text-align: center;
+	font-size: 0.7rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	display: block;
+}
+
+.checkbox.completed {
+	background-color: var(--primary600);
+	color: var(--shadeLight);
+	border-color: var(--primary600);
+}
