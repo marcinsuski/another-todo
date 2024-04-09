@@ -1,6 +1,5 @@
 .button_container {
 	display: flex;
-	width: 100%;
 	gap: 1rem;
 	justify-content: center;
 }
@@ -22,7 +21,8 @@
 }
 
 .primary,
-.secondary {
+.secondary,
+.outline {
 	padding: 0.5rem 1.5rem;
 }
 
@@ -47,14 +47,14 @@
 }
 
 .outline {
-	color: var(--primary500);
+	color: var(--text100);
 	background-color: transparent;
-	border-color: var(--primary500);
+	border-color: var(--text100);
 
 	&:hover {
 		color: var(--shadeLight);
-		background-color: var(--primary500);
-		border-color: var(--primary500);
+		background-color: var(--text100);
+		border-color: var(--text100);
 	}
 }
 
