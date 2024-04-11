@@ -3,10 +3,10 @@ import styles from "./item.module.css";
 import Button from "./button";
 import Checkbox from "./checkbox";
 
-import type { Todo } from "types";
+import type { TodoType } from "types";
 
 type ItemProps = {
-	todo: Todo;
+	todo: TodoType;
 };
 
 export default function Item({ todo }: ItemProps) {
@@ -14,7 +14,7 @@ export default function Item({ todo }: ItemProps) {
 	return (
 		<div className={styles.item}>
 			<div className={styles.item__status}>
-				<Checkbox completed={completed} />
+				<Checkbox checked={completed} />
 			</div>
 			<div data-testid="todo-name" className={styles.item__name}>
 				{name}

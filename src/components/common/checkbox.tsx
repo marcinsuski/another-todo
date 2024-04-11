@@ -1,17 +1,41 @@
+import { ChangeEvent } from "react";
 import styles from "./checkbox.module.css";
 
 type CheckboxProps = {
-	completed: boolean;
+	checked: boolean;
+	className?: string;
+	name?: string;
+	title?: string;
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function Checkbox({ completed }: CheckboxProps) {
-	const className = [styles.checkbox, completed ? styles.completed : ""].join(
-		" "
-	);
+export default function Checkbox({
+	checked,
+	className,
+	name,
+	title,
+	onChange,
+}: CheckboxProps) {
+	const classes = [
+		styles.checkbox,
+		checked ? styles.completed : "",
+		className,
+	].join(" ");
 
 	return (
-		<button data-testid="checkbox" className={className}>
-			{completed ? "✔" : ""}
-		</button>
+		<div className={styles.wrapper}>
+			{title}
+			<label className={styles.container}>
+				<input
+					data-testid="checkbox"
+					type="checkbox"
+					name={name}
+					checked={checked}
+					className={classes}
+					onChange={onChange}
+				/>
+				<span className={styles.checkmark}></span>
+			</label>
+		</div>
 	);
 }

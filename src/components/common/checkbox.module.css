@@ -1,6 +1,10 @@
-.checkbox {
-	border: 1px solid;
-	border-color: var(--error500);
+.wrapper {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.container {
 	border-radius: 50%;
 	background-color: transparent;
 	color: var(--shadeLight);
@@ -11,10 +15,54 @@
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	display: block;
+	position: relative;
 }
 
-.checkbox.completed {
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1.06rem;
+	height: 1.1rem;
+	border-radius: 50%;
+	background-color: transparent;
+	border: 1px solid;
+	border-color: var(--error500);
+}
+
+.container:hover input ~ .checkmark {
+	background-color: var(--neutral400);
+}
+
+.container:hover input:checked ~ .checkmark {
+	outline: 1px solid var(--primary600);
+}
+
+.container input:checked ~ .checkmark {
 	background-color: var(--primary600);
 	color: var(--shadeLight);
 	border-color: var(--primary600);
+}
+
+.checkmark:after {
+	content: "✔";
+	font-size: 0.75rem;
+	position: absolute;
+	display: none;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--shadeLight);
+}
+
+.container input:checked ~ .checkmark:after {
+	display: block;
 }

@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import styles from "./modal.module.css";
 
 import Button from "./button";
+import Checkbox from "./checkbox";
 
 interface ModalProps {
 	isOpen: boolean;
@@ -48,16 +49,13 @@ function Content({ onDismiss }: ContentProps) {
 					<input type="text" name="name" value={todo.name} onChange={setName} />
 				</label>
 
-				<label className={styles.formField}>
-					Ukończone:
-					<input
-						type="checkbox"
-						name="completed"
-						checked={todo.completed}
-						onChange={setCompleted}
-					/>
-				</label>
-
+				<Checkbox
+					className={styles.formField}
+					name="completed"
+					checked={todo.completed}
+					title="Ukończone:"
+					onChange={setCompleted}
+				/>
 				<Button type="submit" mode="secondary" title="Dodaj taski" />
 			</form>
 		</div>
