@@ -1,8 +1,11 @@
 import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { addTodo } from "../../redux/todos-slice";
+
 import styles from "./modal.module.css";
 
 import Button from "./button";
-import Checkbox from "./checkbox";
 
 interface ModalProps {
 	isOpen: boolean;
@@ -13,24 +16,21 @@ interface ContentProps {
 	onDismiss: () => void;
 }
 
-interface Todo {
-	name: string;
-	completed: boolean;
-}
-
 function Content({ onDismiss }: ContentProps) {
-	const [todo, setTodo] = useState<Todo>({ name: "", completed: false });
+	const [todoName, setTodoName] = useState<string>("");
+	const dispatch = useDispatch();
 
 	const setName = (e: ChangeEvent<HTMLInputElement>) => {
-		setTodo({ ...todo, [e.target.name]: e.target.value });
+		setTodoName(e.target.value);
 	};
 
-	const setCompleted = (e: ChangeEvent<HTMLInputElement>) => {
-		setTodo({ ...todo, completed: e.target.checked });
-	};
-
-	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const addTodoHandler = () => {
+		if (!todoName) {
+			alert("Należy podać nazwę zadania");
+			return;
+		}
+		dispatch(addTodo({ id: uuidv4(), name: todoName, completed: false }));
+		setTodoName("");
 		onDismiss();
 	};
 
@@ -43,20 +43,23 @@ function Content({ onDismiss }: ContentProps) {
 					mode="flat"
 				/>
 			</div>
-			<form className={styles.addTodoForm} onSubmit={onSubmit}>
+			<form className={styles.addTodoForm}>
 				<label className={styles.formField}>
 					Nazwa:
-					<input type="text" name="name" value={todo.name} onChange={setName} />
+					<input
+						type="text"
+						name="name"
+						value={todoName}
+						placeholder="Dodaj zadanie"
+						onChange={(e) => setName(e)}
+					/>
 				</label>
-
-				<Checkbox
-					className={styles.formField}
-					name="completed"
-					checked={todo.completed}
-					title="Ukończone:"
-					onChange={setCompleted}
+				<Button
+					type="submit"
+					mode="secondary"
+					title="Dodaj taski"
+					onClick={addTodoHandler}
 				/>
-				<Button type="submit" mode="secondary" title="Dodaj taski" />
 			</form>
 		</div>
 	);

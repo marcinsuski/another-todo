@@ -4,7 +4,7 @@ import Button from "../../common/button";
 import Modal from "../..//common/modal";
 import Table from "../../common/table";
 
-export default function TodoList() {
+export default function TodoTable() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const onDismiss = () => {

@@ -1,7 +1,11 @@
-export type Todo = {
-	id: number;
+export type TodoType = {
+	id: string;
 	name: string;
 	completed: boolean;
+};
+
+export type TodoListType = {
+	todos: TodoType[];
 };
 
 export type Button = {

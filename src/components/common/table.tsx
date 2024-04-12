@@ -1,8 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { RootState } from "../../redux/store";
+import { deleteTodo } from "../../redux/todos-slice";
+
 import styles from "./table.module.css";
+
 import Item from "./item";
-import Todos from "../../utils/todos";
+
+import { TodoType } from "../../types";
 
 export default function Table() {
+	const dispatch = useDispatch();
+	const Todos = useSelector<RootState, TodoType[]>(
+		(state) => state.todos.value
+	);
+
+	useEffect(() => {
+		Todos && localStorage.setItem("todos", JSON.stringify(Todos));
+	}, [Todos]);
+
 	return (
 		<div className={styles.table}>
 			<div className={styles.table__head}>
@@ -13,7 +29,14 @@ export default function Table() {
 				</div>
 			</div>
 			<div className={styles.table__body}>
-				{Todos && Todos.map((todo) => <Item key={todo.id} todo={todo} />)}
+				{Todos &&
+					Todos.map((todo) => (
+						<Item
+							key={todo.id}
+							todo={todo}
+							deleteHandler={() => dispatch(deleteTodo({ id: todo.id }))}
+						/>
+					))}
 			</div>
 		</div>
 	);
