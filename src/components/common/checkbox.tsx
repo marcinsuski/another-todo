@@ -5,7 +5,6 @@ type CheckboxProps = {
 	checked: boolean;
 	className?: string;
 	name?: string;
-	title?: string;
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -13,7 +12,6 @@ export default function Checkbox({
 	checked,
 	className,
 	name,
-	title,
 	onChange,
 }: CheckboxProps) {
 	const classes = [
@@ -24,7 +22,6 @@ export default function Checkbox({
 
 	return (
 		<div className={styles.wrapper}>
-			{title}
 			<label className={styles.container}>
 				<input
 					data-testid="checkbox"
