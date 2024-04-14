@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { TodoType } from "../types";
+import Todo from "classes/Todo";
 
 const todos = localStorage.getItem("todos") || [];
 
@@ -9,7 +9,7 @@ if (typeof todos === "string") {
 	parsed = JSON.parse(todos);
 }
 
-const initialState: TodoType[] = parsed || [];
+const initialState: Todo[] = parsed || [];
 
 const TodoSlice = createSlice({
 	name: "todo",

@@ -4,21 +4,21 @@ import styles from "./item.module.css";
 import Button from "./button";
 import Checkbox from "./checkbox";
 
-import type { TodoType } from "../../types";
+import Todo from "classes/Todo";
 
 type ItemProps = {
-	todo: TodoType;
+	todo: Todo;
 	deleteHandler: () => void;
 };
 
 export default function Item({ todo, deleteHandler }: ItemProps) {
 	const todoList = useTodoList();
-	const { name, id } = todo;
+	const { name } = todo;
 	let { completed } = todo;
 
 	function completedHandler() {
 		completed = !completed;
-		todoList.toggleTodo(id);
+		todoList.toggleTodo(todo.getId());
 	}
 
 	return (

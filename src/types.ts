@@ -1,11 +1,20 @@
+import Todo from "classes/Todo";
+
 export type TodoType = {
-	id: string;
 	name: string;
 	completed: boolean;
 };
 
+export type TodoStringifiedType = TodoType & {
+	id: string;
+};
+
 export type TodoListType = {
-	todos: TodoType[];
+	addTodo: (todoName: string) => void;
+	getTodos: () => Todo[];
+	deleteTodo: (id: string) => void;
+	deleteAllTodos: () => void;
+	toggleTodo: (id: string) => void;
 };
 
 export type Button = {

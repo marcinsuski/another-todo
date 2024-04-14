@@ -1,6 +1,6 @@
 import type { TodoType } from "types";
 export default class Todo implements TodoType {
-	public id: string;
+	private id: string;
 	public name: string;
 	public completed: boolean;
 

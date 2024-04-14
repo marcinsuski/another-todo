@@ -7,13 +7,11 @@ import styles from "./table.module.css";
 
 import Item from "./item";
 
-import type { TodoType } from "../../types";
+import Todo from "../../classes/Todo";
 
 export default function Table() {
 	const todoList = useTodoList();
-	const Todos = useSelector<RootState, TodoType[]>(
-		(state) => state.todos.value
-	);
+	const Todos = useSelector<RootState, Todo[]>((state) => state.todos.value);
 
 	useEffect(() => {
 		Todos && localStorage.setItem("todos", JSON.stringify(Todos));
@@ -30,11 +28,11 @@ export default function Table() {
 			</div>
 			<div className={styles.table__body}>
 				{Todos &&
-					Todos.map((todo) => (
+					Todos.map((todo: Todo, index) => (
 						<Item
-							key={todo.id}
+							key={index}
 							todo={todo}
-							deleteHandler={() => todoList.deleteTodo(todo.id)}
+							deleteHandler={() => todoList.deleteTodo(todo.getId())}
 						/>
 					))}
 			</div>

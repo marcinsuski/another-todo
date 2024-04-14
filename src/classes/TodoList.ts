@@ -3,11 +3,10 @@ import { AppDispatch } from "../store/store";
 import { setState } from "../store/todos-slice";
 
 import Todo from "./Todo";
+import { TodoStringifiedType } from "types";
 
-import type { TodoType, TodoListType } from "../types";
-
-export default class TodoList implements TodoListType {
-	public todos: Todo[];
+export default class TodoList {
+	private todos: Todo[];
 	public dispatch: AppDispatch;
 
 	constructor(dispatch: AppDispatch) {
@@ -44,7 +43,7 @@ export default class TodoList implements TodoListType {
 	public toggleTodo(id: string): void {
 		this.todos = this.todos.map((todo) => {
 			return todo.getId() === id
-				? new Todo(todo.id, todo.name, (todo.completed = !todo.completed))
+				? new Todo(todo.getId(), todo.name, (todo.completed = !todo.completed))
 				: todo;
 		});
 		this.dispatch(setState(this.getTodos()));
@@ -55,7 +54,11 @@ export default class TodoList implements TodoListType {
 		const localStorageData = localStorage.getItem("todos");
 		// prettier-ignore
 		return localStorageData	
-		? JSON.parse(localStorageData).map((todo: TodoType) => new Todo(todo.id, todo.name, todo.completed)) 
+		? JSON.parse(localStorageData).map((todo: TodoStringifiedType) => {
+			const {id, name, completed } = todo;
+			return new Todo(id, name, completed)
+		}
+		) 
 		: [];
 	}
 
