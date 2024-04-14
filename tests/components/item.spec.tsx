@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 
-import { render, screen } from "@testing-library/react";
+import { store } from "../../src/store/store";
 
-import { store } from "../../src/redux/store";
 import Item from "../../src/components/common/item";
+import { TodoListProvider } from "../../src/store/todoListContext";
 
 describe("Item component", () => {
 	const todo = {
@@ -16,7 +17,9 @@ describe("Item component", () => {
 	test("renders the todo name", () => {
 		render(
 			<Provider store={store}>
-				<Item todo={todo} deleteHandler={deleteHandler} />
+				<TodoListProvider>
+					<Item todo={todo} deleteHandler={deleteHandler} />
+				</TodoListProvider>
 			</Provider>
 		);
 
@@ -27,7 +30,9 @@ describe("Item component", () => {
 	test("renders the checkbox", () => {
 		render(
 			<Provider store={store}>
-				<Item todo={todo} deleteHandler={deleteHandler} />
+				<TodoListProvider>
+					<Item todo={todo} deleteHandler={deleteHandler} />
+				</TodoListProvider>
 			</Provider>
 		);
 		const checkbox = screen.getByTestId("checkbox");
@@ -37,7 +42,9 @@ describe("Item component", () => {
 	test("renders the delete button", () => {
 		render(
 			<Provider store={store}>
-				<Item todo={todo} deleteHandler={deleteHandler} />
+				<TodoListProvider>
+					<Item todo={todo} deleteHandler={deleteHandler} />
+				</TodoListProvider>
 			</Provider>
 		);
 		const deleteBtn = screen.getByTestId("my-button");

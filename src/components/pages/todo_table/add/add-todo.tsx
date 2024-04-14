@@ -19,12 +19,12 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 
 	const addTodoHandler = (e: React.SyntheticEvent<EventTarget>) => {
 		e.preventDefault();
-		if (todoName) {
+		if (!todoName) {
+			alert("Należy podać nazwę zadania");
+		} else {
 			todoList.addTodo(todoName);
 			setTodoName("");
 			onDismiss();
-		} else {
-			alert("Należy podać nazwę zadania");
 		}
 	};
 
@@ -32,6 +32,7 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 		<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 			<div className={styles.closeButtonWrapper}>
 				<Button
+					dataTestId="close-button"
 					onClick={onDismiss}
 					icon={"./src/static/close_icon.svg"}
 					mode="flat"
@@ -39,7 +40,7 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 			</div>
 			<div className={styles.modalContent}>
 				<h4>Wprowadź nazwę zadania</h4>
-				<form className={styles.addTodoForm}>
+				<form data-testid="add-todo-form" className={styles.addTodoForm}>
 					<label className={styles.formField}>
 						Nazwa:
 						<input
@@ -51,6 +52,7 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 						/>
 					</label>
 					<Button
+						dataTestId="submit-button"
 						type="submit"
 						mode="primary"
 						className="success"

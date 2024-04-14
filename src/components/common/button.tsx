@@ -14,6 +14,7 @@ import type { Button } from "../../types";
  */
 export default function Button({
 	color,
+	dataTestId,
 	className,
 	disabled = false,
 	icon,
@@ -39,7 +40,7 @@ export default function Button({
 	return (
 		<div className={styles.button_container}>
 			<button
-				data-testid="my-button"
+				data-testid={dataTestId ? dataTestId : "my-button"}
 				type={type ? type : "button"}
 				disabled={disabled}
 				className={[styles.button, buttonStyle, buttonColor, customClass].join(

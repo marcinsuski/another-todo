@@ -4,8 +4,9 @@ import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import { store } from "../src/redux/store";
+import { store } from "../src/store/store";
 import App from "../src";
+import { TodoListProvider } from "../src/store/todoListContext";
 
 export function renderWithRouter(ui: ReactNode, { route = "/" } = {}) {
 	return {
@@ -17,7 +18,9 @@ describe("Router", () => {
 	test("renders default route", () => {
 		const { getByText } = renderWithRouter(
 			<Provider store={store}>
-				<App />
+				<TodoListProvider>
+					<App />
+				</TodoListProvider>
 			</Provider>,
 
 			{ route: "/" }

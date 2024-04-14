@@ -13,8 +13,4 @@ export default class Todo implements TodoType {
 	public getId(): string {
 		return this.id;
 	}
-
-	public complete() {
-		this.completed = true;
-	}
 }

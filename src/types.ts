@@ -10,6 +10,7 @@ export type TodoListType = {
 
 export type Button = {
 	color?: "error" | "success";
+	dataTestId?: string;
 	disabled?: boolean;
 	icon?: string;
 	title?: string;
