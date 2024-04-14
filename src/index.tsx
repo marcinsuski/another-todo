@@ -1,13 +1,21 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import useTodoList from "./hooks/useTodoList";
 import "./index.css";
 
 import MainPage from "./components/pages";
 import Header from "./components/common/header";
 import Main from "./components/common/main";
-
 import LoadingText from "./loading_text";
+
 export default function App() {
+	const todoList = useTodoList();
+
+	useEffect(() => {
+		// @ts-expect-error Attach todoList to window for debugging
+		window.todoList = todoList;
+	}, [todoList]);
+
 	return (
 		<>
 			<Header />
