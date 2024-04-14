@@ -1,15 +1,15 @@
 import styles from "./button.module.css";
-
 import { BUTTON_TYPES } from "../../constants";
 
-import type { Button } from "types";
+import type { Button } from "../../types";
 
 /**
  * Returns a Button component customized by parameters specified as props
  * @param {string} title - text visible on the button
+ * @param {string} icon - icon URL: 'src/static/image.svg'
  * @param {string} mode - type of button style (flat, outline, primary, secondary, round)
- * @param {string} icon - icon URL
  * @param {string} type - type of button(submit, reset, button) - if not provided, type will we set to button
+ * @param {string} className - additional styling of button(colors: error, success, accent)
  * @returns {React.JSX.Element}
  */
 export default function Button({

@@ -16,5 +16,5 @@ export type Button = {
 	mode?: "primary" | "secondary" | "flat" | "outline" | "round";
 	type?: "submit" | "reset" | "button";
 	className?: string;
-	onClick?: () => void;
+	onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
 };
