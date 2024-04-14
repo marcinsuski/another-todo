@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { RootState } from "../../redux/store";
-import { deleteTodo } from "../../redux/todos-slice";
+import { RootState } from "../../store/store";
+import useTodoList from "../../hooks/useTodoList";
 
 import styles from "./table.module.css";
 
 import Item from "./item";
 
-import { TodoType } from "../../types";
+import type { TodoType } from "../../types";
 
 export default function Table() {
-	const dispatch = useDispatch();
+	const todoList = useTodoList();
 	const Todos = useSelector<RootState, TodoType[]>(
 		(state) => state.todos.value
 	);
@@ -34,7 +34,7 @@ export default function Table() {
 						<Item
 							key={todo.id}
 							todo={todo}
-							deleteHandler={() => dispatch(deleteTodo({ id: todo.id }))}
+							deleteHandler={() => todoList.deleteTodo(todo.id)}
 						/>
 					))}
 			</div>

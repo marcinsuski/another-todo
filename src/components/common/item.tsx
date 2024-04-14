@@ -1,6 +1,5 @@
-import { useDispatch } from "react-redux";
+import useTodoList from "../../hooks/useTodoList";
 import styles from "./item.module.css";
-import { completeTodo } from "../../redux/todos-slice";
 
 import Button from "./button";
 import Checkbox from "./checkbox";
@@ -13,13 +12,13 @@ type ItemProps = {
 };
 
 export default function Item({ todo, deleteHandler }: ItemProps) {
-	const dispatch = useDispatch();
+	const todoList = useTodoList();
 	const { name, id } = todo;
 	let { completed } = todo;
 
 	function completedHandler() {
 		completed = !completed;
-		dispatch(completeTodo({ id, completed }));
+		todoList.toggleTodo(id);
 	}
 
 	return (
@@ -34,7 +33,7 @@ export default function Item({ todo, deleteHandler }: ItemProps) {
 				<Button
 					onClick={deleteHandler}
 					data-testid="delete-btn"
-					mode={"round"}
+					mode={"flat"}
 					className={"deleteTodo"}
 					icon={"src/static/delete_red.svg"}
 				/>
