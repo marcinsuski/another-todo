@@ -35,7 +35,7 @@ export default function Item({ todo, deleteHandler }: ItemProps) {
 					dataTestId="delete-btn"
 					mode={"flat"}
 					className={"deleteTodo"}
-					icon={"src/static/delete_red.svg"}
+					icon={"/delete_red.svg"}
 				/>
 			</div>
 		</div>

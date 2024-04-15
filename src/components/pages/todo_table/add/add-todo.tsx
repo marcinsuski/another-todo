@@ -34,7 +34,7 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 				<Button
 					dataTestId="close-button"
 					onClick={onDismiss}
-					icon={"./src/static/close_icon.svg"}
+					icon={"/close_icon.svg"}
 					mode="flat"
 				/>
 			</div>
