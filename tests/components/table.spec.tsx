@@ -1,34 +1,57 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { RenderResult, render } from "@testing-library/react";
 import { Provider } from "react-redux";
-
-import { store } from "../../src/store/store";
-
-import Table from "../../src/components/common/table";
+import TodoReducer from "../../src/store/todos-slice";
 import { TodoListProvider } from "../../src/store/todoListContext";
 
+import Table from "../../src/components/common/table";
+import Todo from "../../src/classes/Todo";
+import { configureStore } from "@reduxjs/toolkit";
+
 describe("Table", () => {
-	test("renders Table correctly", () => {
-		const { getByText } = render(
-			<Provider store={store}>
+	let getByText: RenderResult["getByText"],
+		getByTestId: RenderResult["getByTestId"];
+
+	beforeEach(() => {
+		const Todos = [
+			new Todo("1", "todo 1", false),
+			new Todo("2", "todo 2", true),
+			new Todo("3", "todo 3", false),
+			new Todo("4", "todo 4", false),
+		];
+
+		const mockStore = configureStore({
+			reducer: { todos: TodoReducer },
+			preloadedState: { todos: { value: Todos } },
+		});
+
+		const queries = render(
+			<Provider store={mockStore}>
 				<TodoListProvider>
 					<Table />
 				</TodoListProvider>
 			</Provider>
 		);
-		const tableHead = getByText(/ostatnie taski/i);
-		expect(tableHead).toBeInTheDocument();
+		getByText = queries.getByText;
+		getByTestId = queries.getByTestId;
 	});
 
-	test("renders tasks correctly", () => {
-		const { getByText } = render(
-			<Provider store={store}>
-				<TodoListProvider>
-					<Table />
-				</TodoListProvider>
-			</Provider>
-		);
-		const tasks = getByText("Taski:");
-		expect(tasks).toBeInTheDocument();
+	test("renders filters correctly", () => {
+		const filterAll = getByTestId("filter-all");
+		expect(filterAll).toBeInTheDocument();
+
+		const filterCompleted = getByTestId("filter-completed");
+		expect(filterCompleted).toBeInTheDocument();
+
+		const filterActive = getByTestId("filter-active");
+		expect(filterActive).toBeInTheDocument();
+	});
+
+	test("renders todos correctly", () => {
+		const todo1 = getByText("todo 1");
+		expect(todo1).toBeInTheDocument();
+
+		const todo2 = getByText("todo 2");
+		expect(todo2).toBeInTheDocument();
 	});
 });

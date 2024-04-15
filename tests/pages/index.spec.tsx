@@ -16,7 +16,7 @@ describe("main page tests", () => {
 				</TodoListProvider>
 			</Provider>
 		);
-		const titleElement = getByText(/ostatnie taski/i);
+		const titleElement = getByText(/filtruj zadania/i);
 		expect(titleElement).toBeInTheDocument();
 	});
 });

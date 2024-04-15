@@ -35,7 +35,7 @@ describe("Todo list", () => {
 	});
 
 	it("renders the Todo list table", () => {
-		const titleElement = getByText(/ostatnie taski/i);
+		const titleElement = getByText(/filtruj zadania/i);
 		expect(titleElement).toBeInTheDocument();
 	});
 

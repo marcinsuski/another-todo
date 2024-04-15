@@ -28,7 +28,7 @@ export default function Table() {
 		<div className={styles.table}>
 			<div className={styles.table__head}>
 				<h3>
-					Taski:
+					Zadania:
 					<span className={styles.todos_count} data-testid="todos-number">
 						{Todos ? filteredTodos.length : "0"} / {Todos ? Todos.length : "0"}
 					</span>
