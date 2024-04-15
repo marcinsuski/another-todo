@@ -6,13 +6,10 @@ import { store } from "../../src/store/store";
 
 import Item from "../../src/components/common/item";
 import { TodoListProvider } from "../../src/store/todoListContext";
+import Todo from "../../src/classes/Todo";
 
 describe("Item component", () => {
-	const todo = {
-		id: "1",
-		name: "Test Todo",
-		completed: false,
-	};
+	const todo = new Todo("1", "Test Todo", false);
 	const deleteHandler = jest.fn();
 	test("renders the todo name", () => {
 		render(
@@ -47,7 +44,7 @@ describe("Item component", () => {
 				</TodoListProvider>
 			</Provider>
 		);
-		const deleteBtn = screen.getByTestId("my-button");
+		const deleteBtn = screen.getByTestId("delete-btn");
 		expect(deleteBtn).toBeInTheDocument();
 	});
 });

@@ -32,7 +32,7 @@ export default function Item({ todo, deleteHandler }: ItemProps) {
 			<div className={styles.item__controls}>
 				<Button
 					onClick={deleteHandler}
-					data-testid="delete-btn"
+					dataTestId="delete-btn"
 					mode={"flat"}
 					className={"deleteTodo"}
 					icon={"src/static/delete_red.svg"}

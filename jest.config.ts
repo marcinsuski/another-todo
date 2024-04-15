@@ -15,7 +15,7 @@ const config: Config.InitialOptions = {
 	collectCoverage: true,
 	coverageReporters: ["json", "html"],
 	collectCoverageFrom: [
-		"**/src/*.{js,jsx,ts,tsx}",
+		"**/src/**/*.{js,jsx,ts,tsx}",
 		"!**/node_modules/**",
 		"!**/vendor/**",
 		"!**/coverage/**",
