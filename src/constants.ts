@@ -5,3 +5,9 @@ export const BUTTON_TYPES = {
 	FLAT: "flat",
 	ROUND: "round",
 };
+
+export const FILTERED_TODOS = {
+	ALL: "all",
+	COMPLETED: "completed",
+	ACTIVE: "active",
+};
