@@ -16,6 +16,10 @@ export default function TodoTable() {
 	const deleteAllTodosHandler = () => {
 		todoList.deleteAllTodos();
 	};
+	const deleteCompletedTodosHandler = () => {
+		todoList.deleteCompletedTodos();
+	};
+
 	const onDismiss = (): void => {
 		setIsAddOpen(false);
 	};
@@ -29,6 +33,7 @@ export default function TodoTable() {
 			<Table />
 			<div className={styles.flex}>
 				<Button
+					dataTestId="delete-all-btn"
 					mode="primary"
 					className={"error"}
 					title="usuń wszystkie"
@@ -36,6 +41,15 @@ export default function TodoTable() {
 					onClick={deleteAllTodosHandler}
 				/>
 				<Button
+					dataTestId="delete-completed-btn"
+					mode="primary"
+					className={"error"}
+					title="usuń ukończone "
+					icon={""}
+					onClick={deleteCompletedTodosHandler}
+				/>
+				<Button
+					dataTestId="add-todo-btn"
 					mode="primary"
 					className="success"
 					title="Dodaj zadanie"

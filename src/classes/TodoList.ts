@@ -40,6 +40,14 @@ export default class TodoList {
 		}
 	}
 
+	public deleteCompletedTodos(): void {
+		if (window.confirm("Na pewno usunąć ukończone zadania?")) {
+			this.todos = this.todos.filter((todo) => todo.completed === false);
+			this.dispatch(setState(this.getTodos()));
+			this.saveToLocalStorage();
+		}
+	}
+
 	public toggleTodo(id: string): void {
 		this.todos = this.todos.map((todo) => {
 			return todo.getId() === id
