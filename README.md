@@ -3,7 +3,9 @@
 ## 💡 CONCEPT
 This web app is made with React, with css modules and Redux Toolkit as state management. The idea is to use OOP and allow control of the state and UI through web browser console (deliberately and intentionally using unsafe methods and mixing OOP with functional React for sake of practice) to manage tasks.
 
-<BR />
+
+## 💻 Demo
+Click the link and check the app: [Link](https://ms-another-todo.netlify.app/)
 
 ## 📦 TECH STACK:
 - TypeScript
