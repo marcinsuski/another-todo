@@ -1,15 +1,9 @@
 import getFilteredTodos from "../../src/utils/get-filtered-todos";
-import Todo from "../../src/classes/Todo";
 import { FILTERED_TODOS } from "../../src/constants";
+import Todos from "../../src/utils/mockTodos";
 
 describe("getFilteredTodos", () => {
-	const mockTodos = [
-		new Todo("1", "Task 1", true),
-		new Todo("2", "Task 2", false),
-		new Todo("3", "Task 3", true),
-		new Todo("4", "Task 4", false),
-		new Todo("5", "Task 5", false),
-	];
+	const mockTodos = Todos;
 
 	test('returns all todos when filter is set to "all"', () => {
 		expect(getFilteredTodos(mockTodos, FILTERED_TODOS.ALL)).toEqual(mockTodos);

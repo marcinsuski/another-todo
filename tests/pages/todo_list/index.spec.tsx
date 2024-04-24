@@ -1,9 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, fireEvent, RenderResult } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { store } from "../../../src/store/store.tsx";
 import TodoTable from "../../../src/components/pages/todo_table/index.tsx";
-import { TodoListProvider } from "../../../src/store/todoListContext.tsx";
+import TodoListProvider from "../../../src/store/todoListContext.tsx";
 
 describe("Todo list", () => {
 	let getByText: RenderResult["getByText"],
@@ -20,11 +18,9 @@ describe("Todo list", () => {
 	global.alert = jest.fn();
 	beforeEach(() => {
 		const queries = render(
-			<Provider store={store}>
-				<TodoListProvider>
-					<TodoTable />
-				</TodoListProvider>
-			</Provider>
+			<TodoListProvider>
+				<TodoTable />
+			</TodoListProvider>
 		);
 		getByText = queries.getByText;
 		getByTestId = queries.getByTestId;

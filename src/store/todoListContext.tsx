@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, ReactNode, useMemo } from "react";
 import TodoList from "../classes/TodoList";
-import TodoStore from "../classes/TodoStoreAdapter";
+import TodoStore from "../classes/TodoStore";
 import type { Todo, TodoListState } from "../types";
 
 type props = {

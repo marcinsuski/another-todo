@@ -15,5 +15,5 @@ export default function getFilteredTodos(
 		),
 	};
 
-	return filteredTodos[filter];
+	return filteredTodos[filter] || Todos;
 }

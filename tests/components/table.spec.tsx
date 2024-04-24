@@ -1,36 +1,31 @@
 import "@testing-library/jest-dom";
-import { RenderResult, render } from "@testing-library/react";
-import { Provider } from "react-redux";
-import TodoReducer from "../../src/store/todos-slice";
-import { TodoListProvider } from "../../src/store/todoListContext";
+import { RenderResult, fireEvent, render } from "@testing-library/react";
+import { TodoListContext } from "../../src/store/todoListContext";
 
 import Table from "../../src/components/common/table";
-import Todo from "../../src/classes/Todo";
-import { configureStore } from "@reduxjs/toolkit";
 
 describe("Table", () => {
 	let getByText: RenderResult["getByText"],
 		getByTestId: RenderResult["getByTestId"];
 
 	beforeEach(() => {
-		const Todos = [
-			new Todo("1", "todo 1", false),
-			new Todo("2", "todo 2", true),
-			new Todo("3", "todo 3", false),
-			new Todo("4", "todo 4", false),
+		const todos = [
+			{ id: "1", name: "todo 1", completed: false },
+			{ id: "2", name: "todo 2", completed: true },
 		];
 
-		const mockStore = configureStore({
-			reducer: { todos: TodoReducer },
-			preloadedState: { todos: { value: Todos } },
-		});
+		const mockFunctions = {
+			addTodo: jest.fn(),
+			deleteTodo: jest.fn(),
+			deleteAllTodos: jest.fn(),
+			deleteCompletedTodos: jest.fn(),
+			toggleTodo: jest.fn(),
+		};
 
 		const queries = render(
-			<Provider store={mockStore}>
-				<TodoListProvider>
-					<Table />
-				</TodoListProvider>
-			</Provider>
+			<TodoListContext.Provider value={{ todos, ...mockFunctions }}>
+				<Table />
+			</TodoListContext.Provider>
 		);
 		getByText = queries.getByText;
 		getByTestId = queries.getByTestId;
@@ -48,10 +43,19 @@ describe("Table", () => {
 	});
 
 	test("renders todos correctly", () => {
-		const todo1 = getByText("todo 1");
-		expect(todo1).toBeInTheDocument();
+		expect(getByTestId("todos-number")).toHaveTextContent("2 / 2");
+		expect(getByText("todo 1")).toBeInTheDocument();
+		expect(getByText("todo 2")).toBeInTheDocument();
+	});
 
-		const todo2 = getByText("todo 2");
-		expect(todo2).toBeInTheDocument();
+	test("filter buttons functionality", () => {
+		const filterAllButton = getByTestId("filter-all");
+		fireEvent.click(filterAllButton);
+
+		const filterCompletedButton = getByTestId("filter-completed");
+		fireEvent.click(filterCompletedButton);
+
+		const filterActiveButton = getByTestId("filter-active");
+		fireEvent.click(filterActiveButton);
 	});
 });

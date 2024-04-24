@@ -1,11 +1,9 @@
 import "@testing-library/jest-dom";
-import { Provider } from "react-redux";
 import { render, fireEvent } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import AddTodoContent from "../../../../src/components/pages/todo_table/add/add-todo";
 import Modal from "../../../../src/components/common/modal";
-import { TodoListProvider } from "../../../../src/store/todoListContext";
-import { store } from "../../../../src/store/store";
-import { act } from "react-dom/test-utils";
+import TodoListProvider from "../../../../src/store/todoListContext";
 
 jest.mock("../../../../src/hooks/useTodoList", () => ({
 	__esModule: true,
@@ -44,11 +42,9 @@ describe("AddTodoContent component", () => {
 
 	it("should call addTodo when form is submitted with filled input", async () => {
 		const { getByTestId, getByPlaceholderText } = render(
-			<Provider store={store}>
-				<TodoListProvider>
-					<AddTodoContent onDismiss={onDismissMock} />
-				</TodoListProvider>
-			</Provider>
+			<TodoListProvider>
+				<AddTodoContent onDismiss={onDismissMock} />
+			</TodoListProvider>
 		);
 		const input = getByPlaceholderText("Dodaj zadanie") as HTMLInputElement;
 		await act(async () => {

@@ -8,7 +8,6 @@ export type TodoFilters = "all" | "active" | "completed";
 
 export type TodoListState = {
 	todos: Todo[];
-	filter?: TodoFilters;
 };
 
 export type ButtonMode = "primary" | "flat" | "outline" | "round";
