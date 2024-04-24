@@ -1,20 +1,15 @@
-import ReactDOM from "react-dom/client";
 import { StrictMode } from "react";
-import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import { store } from "./store/store.tsx";
-import { TodoListProvider } from "./store/todoListContext";
-
 import App from "./index.tsx";
+import TodoListProvider from "./store/todoListContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<Provider store={store}>
+		<TodoListProvider>
 			<Router>
-				<TodoListProvider>
-					<App />
-				</TodoListProvider>
+				<App />
 			</Router>
-		</Provider>
+		</TodoListProvider>
 	</StrictMode>
 );

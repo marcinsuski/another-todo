@@ -1,6 +1,5 @@
-import { ChangeEvent, useState } from "react";
-import useTodoList from "../../../../hooks/useTodoList";
-
+import { ChangeEvent, useContext, useState } from "react";
+import { TodoListContext } from "../../../../store/todoListContext";
 import styles from "../../../common/modal.module.css";
 
 import Button from "../../../common/button";
@@ -11,7 +10,7 @@ interface ContentProps {
 
 export default function AddTodoContent({ onDismiss }: ContentProps) {
 	const [todoName, setTodoName] = useState<string>("");
-	const todoList = useTodoList();
+	const { addTodo } = useContext(TodoListContext);
 
 	const setName = (e: ChangeEvent<HTMLInputElement>) => {
 		setTodoName(e.target.value);
@@ -20,9 +19,9 @@ export default function AddTodoContent({ onDismiss }: ContentProps) {
 	const addTodoHandler = (e: React.SyntheticEvent<EventTarget>) => {
 		e.preventDefault();
 		if (!todoName) {
-			alert("Należy podać nazwę zadania");
+			alert("Podaj nazwę zadania");
 		} else {
-			todoList.addTodo(todoName);
+			addTodo(todoName);
 			setTodoName("");
 			onDismiss();
 		}

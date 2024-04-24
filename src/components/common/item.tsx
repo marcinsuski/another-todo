@@ -1,10 +1,10 @@
-import useTodoList from "../../hooks/useTodoList";
+import { useContext } from "react";
+import { TodoListContext } from "../../store/todoListContext";
 import styles from "./item.module.css";
 
 import Button from "./button";
 import Checkbox from "./checkbox";
-
-import Todo from "classes/Todo";
+import { Todo } from "../../types";
 
 type ItemProps = {
 	todo: Todo;
@@ -12,13 +12,13 @@ type ItemProps = {
 };
 
 export default function Item({ todo, deleteHandler }: ItemProps) {
-	const todoList = useTodoList();
+	const { toggleTodo } = useContext(TodoListContext);
 	const { name } = todo;
 	let { completed } = todo;
 
 	function completedHandler() {
 		completed = !completed;
-		todoList.toggleTodo(todo.getId());
+		toggleTodo(todo.id);
 	}
 
 	return (

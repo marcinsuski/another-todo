@@ -3,49 +3,34 @@ import { BUTTON_TYPES } from "../../constants";
 
 import type { Button } from "../../types";
 
-/**
- * Returns a Button component customized by parameters specified as props
- * @param {string} title - text visible on the button
- * @param {string} icon - icon URL: 'src/static/image.svg'
- * @param {string} mode - type of button style (flat, outline, primary, secondary, round)
- * @param {string} type - type of button(submit, reset, button) - if not provided, type will we set to button
- * @param {string} className - additional styling of button(colors: error, success, accent)
- * @returns {React.JSX.Element}
- */
+const buttonStyles = {
+	[BUTTON_TYPES.PRIMARY]: styles.primary,
+	[BUTTON_TYPES.OUTLINE]: styles.outline,
+	[BUTTON_TYPES.ROUND]: styles.round,
+	[BUTTON_TYPES.FLAT]: styles.flat,
+};
+
 export default function Button({
-	color,
 	dataTestId,
 	className,
 	disabled = false,
 	icon,
-	mode,
+	mode = "primary",
 	title,
-	type,
+	type = "button",
 	onClick,
 }: Button) {
-	const buttonStyle =
-		mode === BUTTON_TYPES.PRIMARY
-			? styles.primary
-			: mode === BUTTON_TYPES.SECONDARY
-			? styles.secondary
-			: mode === BUTTON_TYPES.OUTLINE
-			? styles.outline
-			: mode === BUTTON_TYPES.ROUND
-			? styles.round
-			: styles.flat;
-
-	const buttonColor = color === "error" ? styles.error : "";
-	const customClass = styles[`${className}`];
+	const buttonMode = buttonStyles[mode];
+	const passedClassName = styles[`${className}`];
+	const classes = [styles.button, buttonMode, passedClassName].join(" ");
 
 	return (
 		<div className={styles.button_container}>
 			<button
 				data-testid={dataTestId ? dataTestId : "my-button"}
-				type={type ? type : "button"}
+				type={type}
 				disabled={disabled}
-				className={[styles.button, buttonStyle, buttonColor, customClass].join(
-					" "
-				)}
+				className={classes}
 				onClick={onClick}
 			>
 				{icon && <img src={icon} alt="" width={20} height={20} />}

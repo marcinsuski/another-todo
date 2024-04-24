@@ -1,6 +1,5 @@
 export const BUTTON_TYPES = {
 	PRIMARY: "primary",
-	SECONDARY: "secondary",
 	OUTLINE: "outline",
 	FLAT: "flat",
 	ROUND: "round",

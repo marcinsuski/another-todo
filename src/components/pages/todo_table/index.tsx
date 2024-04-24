@@ -1,5 +1,5 @@
-import { useState } from "react";
-import useTodoList from "../../../hooks/useTodoList";
+import { useContext, useState } from "react";
+import { TodoListContext } from "../../../store/todoListContext";
 import styles from "../index.module.css";
 
 import Button from "../../common/button";
@@ -9,15 +9,13 @@ import AddTodoContent from "./add/add-todo";
 
 export default function TodoTable() {
 	const [isAddOpen, setIsAddOpen] = useState(false);
-	const todoList = useTodoList();
+	const { deleteAllTodos, deleteCompletedTodos } = useContext(TodoListContext);
 
-	if (!todoList) return;
-
-	const deleteAllTodosHandler = () => {
-		todoList.deleteAllTodos();
+	const deleteAllTodosHandler = (): void => {
+		deleteAllTodos();
 	};
-	const deleteCompletedTodosHandler = () => {
-		todoList.deleteCompletedTodos();
+	const deleteCompletedTodosHandler = (): void => {
+		deleteCompletedTodos();
 	};
 
 	const onDismiss = (): void => {

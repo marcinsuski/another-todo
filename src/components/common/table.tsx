@@ -1,28 +1,18 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { RootState } from "../../store/store";
-import useTodoList from "../../hooks/useTodoList";
-
+import { useContext, useState } from "react";
+import { TodoListContext } from "../../store/todoListContext";
 import styles from "./table.module.css";
+import getFilteredTodos from "../../utils/get-filtered-todos";
 
 import Button from "./button";
 import Item from "./item";
-import Todo from "../../classes/Todo";
-import { FILTERED_TODOS } from "../../constants";
-import getFilteredTodos from "../../utils/get-filtered-todos";
+
+import type { Todo, TodoFilters } from "../../types";
 
 export default function Table() {
-	const [presentedTodos, setPresentedTodos] = useState<string>(
-		FILTERED_TODOS.ALL
-	);
-	const todoList = useTodoList();
-	const Todos = useSelector<RootState, Todo[]>((state) => state.todos.value);
+	const { todos, deleteTodo } = useContext(TodoListContext);
+	const [filter, setFilter] = useState<TodoFilters>("all");
 
-	const filteredTodos = getFilteredTodos(Todos, presentedTodos);
-
-	useEffect(() => {
-		Todos && localStorage.setItem("todos", JSON.stringify(Todos));
-	}, [Todos]);
+	const filteredTodos = todos && getFilteredTodos(todos, filter);
 
 	return (
 		<div className={styles.table}>
@@ -30,7 +20,7 @@ export default function Table() {
 				<h3>
 					Zadania:
 					<span className={styles.todos_count} data-testid="todos-number">
-						{Todos ? filteredTodos.length : "0"} / {Todos ? Todos.length : "0"}
+						{todos ? filteredTodos.length : "0"} / {todos ? todos.length : "0"}
 					</span>
 				</h3>
 			</div>
@@ -38,7 +28,7 @@ export default function Table() {
 				<p>Filtruj zadania:</p>
 				<div className={styles.flex}>
 					<Button
-						onClick={() => setPresentedTodos(FILTERED_TODOS.ALL)}
+						onClick={() => setFilter("all")}
 						dataTestId="filter-all"
 						mode={"flat"}
 						title="wszystkie"
@@ -47,7 +37,7 @@ export default function Table() {
 					/>
 					<span className={styles.md}>{"|"}</span>
 					<Button
-						onClick={() => setPresentedTodos(FILTERED_TODOS.COMPLETED)}
+						onClick={() => setFilter("completed")}
 						dataTestId="filter-completed"
 						mode={"flat"}
 						title="ukończone"
@@ -56,7 +46,7 @@ export default function Table() {
 					/>
 					<span className={styles.md}>{"|"}</span>
 					<Button
-						onClick={() => setPresentedTodos(FILTERED_TODOS.ACTIVE)}
+						onClick={() => setFilter("active")}
 						dataTestId="filter-active"
 						mode={"flat"}
 						title="aktywne"
@@ -66,12 +56,12 @@ export default function Table() {
 				</div>
 			</div>
 			<div className={styles.table__body}>
-				{Todos &&
+				{todos &&
 					filteredTodos.map((todo: Todo, index) => (
 						<Item
 							key={index}
 							todo={todo}
-							deleteHandler={() => todoList.deleteTodo(todo.getId())}
+							deleteHandler={() => deleteTodo(todo.id)}
 						/>
 					))}
 			</div>
