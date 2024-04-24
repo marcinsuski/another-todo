@@ -1,45 +1,52 @@
 import TodoList from "../../src/classes/TodoList";
+import { ITodoStore } from "../../src/types";
+import { v4 as uuidv4 } from "uuid";
 
 describe("TodoList", () => {
-	let todoList;
-	let windowConfirm: jest.SpyInstance;
+	let store: ITodoStore;
+	let todoList: TodoList;
 
 	beforeEach(() => {
-		windowConfirm = jest.spyOn(window, "confirm");
-		windowConfirm.mockImplementation(() => true);
-		todoList = new TodoList(jest.fn());
-		todoList.deleteAllTodos();
+		store = {
+			getState: jest.fn().mockReturnValue({
+				todos: [{ id: "123", name: "Test Todo", completed: false }],
+			}),
+			setState: jest.fn(),
+		};
+		todoList = new TodoList(store);
 	});
 
-	afterEach(() => {
-		windowConfirm.mockRestore();
+	it("should add a new todo item", () => {
+		const newTodoName = "New Todo";
+		todoList.addTodo(newTodoName);
+		expect(store.setState).toHaveBeenCalledWith(
+			expect.objectContaining({
+				todos: expect.arrayContaining([
+					expect.objectContaining({ name: newTodoName, completed: false }),
+				]),
+			})
+		);
 	});
 
-	it("should create a new TodoList instance", () => {
-		todoList = new TodoList(jest.fn());
-		expect(todoList).toBeInstanceOf(TodoList);
+	it("should delete a todo item", () => {
+		const todoId = uuidv4();
+		(store.getState as jest.Mock).mockReturnValueOnce({
+			todos: [{ id: todoId, name: "Test Todo", completed: false }],
+		});
+		todoList.deleteTodo(todoId);
+		expect(store.setState).toHaveBeenCalledWith(
+			expect.objectContaining({ todos: [] })
+		);
 	});
 
-	it("should add a new Todo to the list", () => {
-		todoList = new TodoList(jest.fn());
-		todoList.addTodo("Test Todo");
-		expect(todoList.getTodos().length).toBe(1);
-	});
-
-	it("should delete a Todo from the list", () => {
-		todoList = new TodoList(jest.fn());
-		todoList.addTodo("Test Todo");
-		const todo = todoList.getTodos()[0];
-		const id = todo.getId();
-		todoList.deleteTodo(id);
-		expect(todoList.getTodos().length).toBe(0);
-	});
-
-	it("should toggle a Todo in the list", () => {
-		todoList = new TodoList(jest.fn());
-		todoList.addTodo("Test Todo");
-		const id = todoList.getTodos()[0].getId();
-		todoList.toggleTodo(id);
-		expect(todoList.getTodos()[0].completed).toBe(true);
+	it("should toggle a todo item", () => {
+		todoList.toggleTodo("123");
+		expect(store.setState).toHaveBeenCalledWith(
+			expect.objectContaining({
+				todos: expect.arrayContaining([
+					expect.objectContaining({ completed: true }),
+				]),
+			})
+		);
 	});
 });
