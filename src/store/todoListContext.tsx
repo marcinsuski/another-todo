@@ -1,4 +1,12 @@
-import { createContext, useState, useEffect, ReactNode, useMemo } from "react";
+import {
+	createContext,
+	useState,
+	useEffect,
+	ReactNode,
+	useMemo,
+	SetStateAction,
+	Dispatch,
+} from "react";
 import TodoList from "../classes/TodoList";
 import TodoStore from "../classes/TodoStore";
 import type { Todo, TodoListState } from "../types";
@@ -8,7 +16,10 @@ type props = {
 };
 
 export type TodoListContextType = {
+	todoList: TodoList;
+	store: TodoStore;
 	todos: Todo[];
+	setTodos: Dispatch<SetStateAction<Todo[]>>;
 	addTodo: (name: string) => void;
 	deleteTodo: (id: string) => void;
 	deleteAllTodos: () => void;
@@ -17,7 +28,10 @@ export type TodoListContextType = {
 };
 
 export const TodoListContext = createContext<TodoListContextType>({
+	store: new TodoStore({ todos: [] }),
+	todoList: new TodoList(new TodoStore({ todos: [] })),
 	todos: [],
+	setTodos: () => {},
 	addTodo: () => {},
 	deleteTodo: () => {},
 	deleteAllTodos: () => {},
@@ -34,7 +48,7 @@ export default function TodoListProvider({ children }: props) {
 
 	useEffect(() => {
 		setTodos(todoList.getTodos());
-	}, [todoList]);
+	}, [todoList, store]);
 
 	const addTodo = (name: string) => {
 		todoList.addTodo(name);
@@ -64,7 +78,10 @@ export default function TodoListProvider({ children }: props) {
 	return (
 		<TodoListContext.Provider
 			value={{
+				store,
+				todoList,
 				todos,
+				setTodos,
 				addTodo,
 				deleteTodo,
 				deleteAllTodos,
