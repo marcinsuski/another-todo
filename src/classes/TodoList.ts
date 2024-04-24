@@ -1,76 +1,57 @@
+import { Todo, ITodoStore } from "../types";
 import { v4 as uuidv4 } from "uuid";
-import { AppDispatch } from "../store/store";
-import { setState } from "../store/todos-slice";
-
-import Todo from "./Todo";
-import { TodoStringifiedType } from "types";
 
 export default class TodoList {
-	private todos: Todo[];
-	public dispatch: AppDispatch;
+	#store;
 
-	constructor(dispatch: AppDispatch) {
-		this.dispatch = dispatch;
-		this.todos = this.getFromLocalStorage();
+	constructor(store: ITodoStore) {
+		this.#store = store;
 	}
 
-	public addTodo(todoName: string): void {
-		const todoId = uuidv4();
-		const newTodo = new Todo(todoId, todoName, false);
-		this.todos = [...this.todos, newTodo];
-		this.dispatch(setState(this.getTodos()));
-		this.saveToLocalStorage();
+	getTodos(): Todo[] {
+		return this.#store.getState().todos;
 	}
 
-	public getTodos(): Todo[] {
-		return this.todos;
-	}
-
-	public deleteTodo(id: string): void {
-		this.todos = this.todos.filter((todo) => todo.getId() !== id);
-		this.dispatch(setState(this.getTodos()));
-		this.saveToLocalStorage();
-	}
-
-	public deleteAllTodos(): void {
-		if (window.confirm("Na pewno usunąć wszystkie zadania?")) {
-			this.todos = [];
-			this.dispatch(setState(this.getTodos()));
-			this.saveToLocalStorage();
-		}
-	}
-
-	public deleteCompletedTodos(): void {
-		if (window.confirm("Na pewno usunąć ukończone zadania?")) {
-			this.todos = this.todos.filter((todo) => todo.completed === false);
-			this.dispatch(setState(this.getTodos()));
-			this.saveToLocalStorage();
-		}
-	}
-
-	public toggleTodo(id: string): void {
-		this.todos = this.todos.map((todo) => {
-			return todo.getId() === id
-				? new Todo(todo.getId(), todo.name, (todo.completed = !todo.completed))
-				: todo;
+	addTodo(name: string): void {
+		const newTodo = { id: uuidv4(), name, completed: false };
+		const currentState = this.#store.getState();
+		this.#store.setState({
+			...currentState,
+			todos: [...(currentState.todos || []), newTodo],
 		});
-		this.dispatch(setState(this.getTodos()));
-		this.saveToLocalStorage();
 	}
 
-	private getFromLocalStorage(): Todo[] {
-		const localStorageData = localStorage.getItem("todos");
-		// prettier-ignore
-		return localStorageData	
-		? JSON.parse(localStorageData).map((todo: TodoStringifiedType) => {
-			const {id, name, completed } = todo;
-			return new Todo(id, name, completed)
+	deleteTodo(id: string): void {
+		const currentState = this.#store.getState();
+		this.#store.setState({
+			...currentState,
+			todos: currentState.todos.filter((todo) => todo.id !== id),
+		});
+	}
+	deleteAllTodos(): void {
+		if (window.confirm("Na pewno usunąć wszystkie zadania?")) {
+			const currentState = this.#store.getState();
+			this.#store.setState({ ...currentState, todos: [] });
 		}
-		) 
-		: [];
 	}
 
-	private saveToLocalStorage(): void {
-		localStorage.setItem("todos", JSON.stringify(this.todos));
+	deleteCompletedTodos(): void {
+		if (window.confirm("Na pewno usunąć ukończone zadania?")) {
+			const currentState = this.#store.getState();
+			this.#store.setState({
+				...currentState,
+				todos: this.getTodos().filter((todo) => !todo.completed),
+			});
+		}
+	}
+
+	toggleTodo(id: string): void {
+		const currentState = this.#store.getState();
+		this.#store.setState({
+			...currentState,
+			todos: this.getTodos().map((todo) =>
+				todo.id === id ? { ...todo, completed: !todo.completed } : todo
+			),
+		});
 	}
 }
