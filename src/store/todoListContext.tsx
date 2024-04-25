@@ -16,9 +16,9 @@ type props = {
 };
 
 export type TodoListContextType = {
-	todoList: TodoList;
 	store: TodoStore;
 	todos: Todo[];
+	getTodos: () => void;
 	setTodos: Dispatch<SetStateAction<Todo[]>>;
 	addTodo: (name: string) => void;
 	deleteTodo: (id: string) => void;
@@ -29,8 +29,8 @@ export type TodoListContextType = {
 
 export const TodoListContext = createContext<TodoListContextType>({
 	store: new TodoStore({ todos: [] }),
-	todoList: new TodoList(new TodoStore({ todos: [] })),
 	todos: [],
+	getTodos: () => {},
 	setTodos: () => {},
 	addTodo: () => {},
 	deleteTodo: () => {},
@@ -50,6 +50,9 @@ export default function TodoListProvider({ children }: props) {
 		setTodos(todoList.getTodos());
 	}, [todoList, store]);
 
+	const getTodos = () => {
+		return todoList.getTodos();
+	};
 	const addTodo = (name: string) => {
 		todoList.addTodo(name);
 		setTodos(todoList.getTodos());
@@ -79,8 +82,8 @@ export default function TodoListProvider({ children }: props) {
 		<TodoListContext.Provider
 			value={{
 				store,
-				todoList,
 				todos,
+				getTodos,
 				setTodos,
 				addTodo,
 				deleteTodo,

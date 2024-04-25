@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { TodoListContext } from "../../store/todoListContext";
 import styles from "./table.module.css";
 import getFilteredTodos from "../../utils/get-filtered-todos";
@@ -9,15 +9,10 @@ import Item from "./item";
 import type { Todo, TodoFilters } from "../../types";
 
 export default function Table() {
-	const { todos, store, todoList, setTodos, deleteTodo } =
-		useContext(TodoListContext);
+	const { todos, deleteTodo } = useContext(TodoListContext);
 	const [filter, setFilter] = useState<TodoFilters>("all");
 
 	const filteredTodos = todos && getFilteredTodos(todos, filter);
-
-	useEffect(() => {
-		setTodos(todoList.getTodos());
-	}, [store, todos]);
 
 	return (
 		<div className={styles.table}>

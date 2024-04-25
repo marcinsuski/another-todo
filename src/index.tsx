@@ -9,12 +9,12 @@ import Main from "./components/common/main";
 import LoadingText from "./loading_text";
 
 export default function App() {
-	const { todoList } = useContext(TodoListContext);
+	const UI = useContext(TodoListContext);
 
 	useEffect(() => {
 		// @ts-expect-error Attach todoList to window for debugging
-		window.todoList = todoList;
-	}, [todoList]);
+		window.todoList = UI;
+	}, [UI.store]);
 
 	return (
 		<>

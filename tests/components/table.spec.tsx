@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { RenderResult, fireEvent, render } from "@testing-library/react";
 import { TodoListContext } from "../../src/store/todoListContext";
 
+import TodoStore from "../../src/classes/TodoStore";
 import Table from "../../src/components/common/table";
 
 describe("Table", () => {
@@ -15,6 +16,10 @@ describe("Table", () => {
 		];
 
 		const mockFunctions = {
+			todos: todos,
+			store: new TodoStore({ todos: [] }),
+			getTodos: jest.fn(),
+			setTodos: jest.fn(),
 			addTodo: jest.fn(),
 			deleteTodo: jest.fn(),
 			deleteAllTodos: jest.fn(),
@@ -23,7 +28,7 @@ describe("Table", () => {
 		};
 
 		const queries = render(
-			<TodoListContext.Provider value={{ todos, ...mockFunctions }}>
+			<TodoListContext.Provider value={mockFunctions}>
 				<Table />
 			</TodoListContext.Provider>
 		);
