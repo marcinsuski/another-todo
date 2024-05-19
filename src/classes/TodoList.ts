@@ -1,57 +1,51 @@
-import { Todo, ITodoStore } from "../types";
+import type { ITodoStore, Todo } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 export default class TodoList {
-	#store;
+	#database;
 
-	constructor(store: ITodoStore) {
-		this.#store = store;
+	constructor(database: ITodoStore) {
+		this.#database = database;
 	}
 
 	getTodos(): Todo[] {
-		return this.#store.getState().todos;
+		return this.#database.getAll();
 	}
 
 	addTodo(name: string): void {
-		const newTodo = { id: uuidv4(), name, completed: false };
-		const currentState = this.#store.getState();
-		this.#store.setState({
-			...currentState,
-			todos: [...(currentState.todos || []), newTodo],
-		});
+		if (!name.length) {
+			console.log("name not provided"); // for debugging purposes
+		}
+		const escapedName = name.trim().replace(/<[^>]*>/g, "");
+		const newTodo = { id: uuidv4(), name: escapedName, completed: false };
+		try {
+			this.#database.add(newTodo);
+			console.log("successfully added todo"); // for debugging purposes
+		} catch (err) {
+			console.log("unable to complete action."); // for debugging purposes
+		}
 	}
 
 	deleteTodo(id: string): void {
-		const currentState = this.#store.getState();
-		this.#store.setState({
-			...currentState,
-			todos: currentState.todos.filter((todo) => todo.id !== id),
-		});
+		this.#database.delete(id);
+		console.log("action completed"); // for debugging purposes
 	}
 	deleteAllTodos(): void {
-		if (window.confirm("Na pewno usunąć wszystkie zadania?")) {
-			const currentState = this.#store.getState();
-			this.#store.setState({ ...currentState, todos: [] });
-		}
+		this.#database.delete();
+		console.log("action completed"); // for debugging purposes
 	}
 
 	deleteCompletedTodos(): void {
-		if (window.confirm("Na pewno usunąć ukończone zadania?")) {
-			const currentState = this.#store.getState();
-			this.#store.setState({
-				...currentState,
-				todos: this.getTodos().filter((todo) => !todo.completed),
-			});
-		}
+		this.#database.delete(undefined, { completed: true });
+		console.log("action completed"); // for debugging purposes
 	}
 
-	toggleTodo(id: string): void {
-		const currentState = this.#store.getState();
-		this.#store.setState({
-			...currentState,
-			todos: this.getTodos().map((todo) =>
-				todo.id === id ? { ...todo, completed: !todo.completed } : todo
-			),
-		});
+	toggleCompleted(id: string): void {
+		const todo = this.#database.getOne(id);
+		if (!todo) {
+			return;
+		}
+		this.#database.update(id, { completed: !todo.completed });
+		console.log("todo status changed"); // for debugging purposes
 	}
 }

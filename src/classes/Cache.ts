@@ -1,12 +1,19 @@
-import { ITodoStore, TodoListState } from "types";
+export default class Cache {
+	dataName: string;
 
-export default class Cache implements ITodoStore {
-	public getState() {
-		const data = localStorage.getItem("todos");
-		return data ? JSON.parse(data) : null;
+	constructor(dataName: string) {
+		if (!dataName) {
+			this.dataName = "data";
+		} else {
+			this.dataName = dataName;
+		}
+	}
+	load() {
+		const data = localStorage.getItem(this.dataName);
+		return data ? JSON.parse(data) : {};
 	}
 
-	public setState(todos: TodoListState) {
-		localStorage.setItem("todos", JSON.stringify(todos));
+	save(data: object) {
+		localStorage.setItem(this.dataName, JSON.stringify(data));
 	}
 }
