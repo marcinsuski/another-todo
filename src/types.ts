@@ -4,29 +4,18 @@ export interface Todo {
 	completed: boolean;
 }
 
-export type TodoFilters = "all" | "active" | "completed";
-
-export type TodoListState = {
+export interface TodoStore {
 	todos: Todo[];
-};
-
-export type ButtonMode = "primary" | "flat" | "outline" | "round";
-
-export type Button = {
-	color?: "error" | "success";
-	dataTestId?: string;
-	disabled?: boolean;
-	icon?: string;
-	title?: string;
-	mode?: ButtonMode;
-	type?: "submit" | "reset" | "button";
-	className?: string;
-	onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
-};
-
-export interface IStore<T> {
-	getState(): T;
-	setState(newState: T): void;
 }
 
-export interface ITodoStore extends IStore<TodoListState> {}
+export interface IStore<T> {
+	localData: T[];
+	store: unknown;
+	add(data: T): void;
+	getOne(id: string): T | null;
+	getAll(): T[];
+	update(id?: string, data?: Partial<T>): void;
+	delete(id?: string, data?: Partial<T>): void;
+}
+
+export interface ITodoStore extends IStore<Todo> {}
