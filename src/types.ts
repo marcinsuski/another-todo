@@ -9,13 +9,11 @@ export interface TodoStore {
 }
 
 export interface IStore<T> {
-	localData: T[];
-	store: unknown;
-	add(data: T): void;
-	getOne(id: string): T | null;
-	getAll(): T[];
-	update(id?: string, data?: Partial<T>): void;
-	delete(id?: string, data?: Partial<T>): void;
+	add: (data: T) => Promise<void>;
+	getAll: () => Promise<T[]>;
+	getOne: (id: string) => Promise<T | null>;
+	update: (id: string, data?: Partial<T>) => Promise<void>;
+	delete: (id?: string, data?: Partial<T>) => Promise<void>;
 }
 
 export interface ITodoStore extends IStore<Todo> {}
