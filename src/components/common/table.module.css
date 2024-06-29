@@ -1,0 +1,50 @@
+.table {
+	width: 60%;
+	margin: 0 auto;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.table__head {
+	text-align: center;
+	margin: 0 0 1rem 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.filterTodos {
+	border-block: 1px solid var(--neutral300);
+	margin-block: 1rem;
+	padding-block: 0.5rem;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+
+	p {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+}
+
+.todos_count {
+	margin-inline: 1rem;
+	padding: 0.5rem 1rem;
+	background-color: var(--secondary100);
+	border: 1px solid var(--secondary300);
+	border-radius: 4px;
+}
+
+.md {
+	display: none;
+	@media (min-width: 576px) {
+		display: block;
+	}
+}

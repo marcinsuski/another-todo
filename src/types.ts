@@ -17,3 +17,14 @@ export interface IStore<T> {
 }
 
 export interface ITodoStore extends IStore<Todo> {}
+
+export type TodoFilters = "all" | "active" | "completed";
+
+export interface TodoListContextType {
+	todos: Todo[];
+	addTodo: (name: string) => Promise<void>;
+	deleteTodo: (id: string) => Promise<void>;
+	deleteAllTodos: () => Promise<void>;
+	deleteCompletedTodos: () => Promise<void>;
+	toggleCompleted: (id: string) => Promise<void>;
+}

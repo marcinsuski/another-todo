@@ -1,0 +1,92 @@
+@keyframes showOverlay {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes showModal {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		transform: scale(0.7);
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	animation: showOverlay 0.5s forwards;
+}
+
+.modal {
+	background-color: var(--shadeLight);
+	padding: 1rem;
+	border-radius: 0.5rem;
+	width: min(700px, 90vw);
+	height: fit-content;
+	animation: showModal 0.5s forwards;
+}
+
+.modalContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 1rem;
+	height: 100%;
+}
+
+.closeButtonWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	img {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}
+
+.addTodoForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	justify-content: flex-start;
+	gap: 1rem;
+	width: min(220px, 85vw);
+	margin: 1rem auto;
+}
+
+.formField {
+	display: flex;
+	justify-content: flex-start;
+	gap: 0.25rem;
+	width: 100%;
+	input[type="text"] {
+		height: 30px;
+	}
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
